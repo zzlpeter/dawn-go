@@ -1,0 +1,12 @@
+# 临时文件
+**/__pycache__
+*.pyc
+.idea
+
+# 日志文件
+logs
+*.log
+
+# 调试文件
+debug*
+

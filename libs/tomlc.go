@@ -1,7 +1,6 @@
 package libs
 
 import (
-	"fmt"
 	"github.com/BurntSushi/toml"
 	"log"
 	"sync"
@@ -20,18 +19,23 @@ var (
 )
 
 type mysql struct {
-	Host 		string 		`json:"host" map:"host"`
-	Port 		int			`json:"port" map:"port"`
-	Username  	string		`json:"username" map:"username"`
-	Password 	string		`json:"password" map:"password"`
-	Db 			string		`json:"db" map:"db"`
+	Host 		string 		`json:"host" map:"host" toml:"host"`
+	Port 		int			`json:"port" map:"port" toml:"port"`
+	Username  	string		`json:"username" map:"username" toml:"username"`
+	Password 	string		`json:"password" map:"password" toml:"password"`
+	Db 			string		`json:"db" map:"db" toml:"db"`
+	MaxCon		int 		`json:"max_con" map:"max_con" toml:"max_con"`
+	MaxIdle 	int 		`json:"max_idle" map:"max_idle" toml:"max_idle"`
 }
 
 type redis struct {
-	Host 		string		`json:"host" map:"host"`
-	Port		int			`json:"port" map:"port"`
-	Db 			int			`json:"db" map:"db"`
-	Password 	string		`json:"password" map:"password"`
+	Host 		string		`json:"host" map:"host" toml:"host"`
+	Port		int			`json:"port" map:"port" toml:"port"`
+	Db 			int			`json:"db" map:"db" toml:"db"`
+	Password 	string		`json:"password" map:"password" toml:"password"`
+	MaxIdle 	int 		`json:"max_idle" map:"max_idle" toml:"max_idle"`
+	MaxActive 	int 		`json:"max_active" map:"max_active" toml:"max_active"`
+	IdleTimeout	int 		`json:"idle_timeout" map:"idle_timeout" toml:"idle_timeout"`
 }
 
 func getFilePath() string {
@@ -39,11 +43,11 @@ func getFilePath() string {
 }
 
 func readConfig() {
-	_, err := toml.DecodeFile("/Users/zhangzhiliang/tiger/zzl/go/src/dawn-go/conf/conf.toml", &cfg)
+	_, err := toml.DecodeFile("conf/conf.toml", &cfg)
 	if err != nil {
 		log.Fatalf("read conf.toml fails with error: %v", err.Error())
 	}
-	fmt.Println("read config init...")
+	log.Println("read config init...")
 }
 
 func getConfig() *tomlConfig {

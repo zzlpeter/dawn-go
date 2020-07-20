@@ -1,12 +1,12 @@
-hash: ee7e54d3bcc0f5f61d371278b5398cb09873a0776d255be175807780119cf1b9
-updated: 2020-04-17T23:19:51.604196+08:00
+hash: d851ef935c77efdac08440eaf211dd6331166a9d1f4e588203d12a2b973bb2b7
+updated: 2020-07-20T11:43:52.340675+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: 3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005
 - name: github.com/go-sql-driver/mysql
   version: 17ef3dd9d98b69acec3e85878995ada9533a9370
+- name: github.com/gomodule/redigo
+  version: 9c11da706d9b7902c6da69c592f75637793fe121
 - name: github.com/satori/go.uuid
   version: f58768cc1a7a7e77a3bd49e98cdd21419399b6a3
-- name: github.com/toml-lang/toml
-  version: e597958af54a9230a872fdab3e538490e8758eb0
 testImports: []
