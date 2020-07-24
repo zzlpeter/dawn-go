@@ -8,3 +8,8 @@ import:
   version: ^1.2.0
 - package: github.com/gomodule/redigo
   version: ^2.0.0
+- package: github.com/asmcos/requests
+- package: github.com/jinzhu/gorm
+  version: ^1.9.15
+- package: github.com/jinzhu/inflection
+  version: ~1.0.0

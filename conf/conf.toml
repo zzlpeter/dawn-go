@@ -5,8 +5,9 @@
         db = "blog"
         username = "root"
         password = "123456"
-        max_conn = 20
-        max_idle = 10
+        max_con = 1
+        max_idle = 50
+        timeout = 10
 
 [redis]
     [redis.default]

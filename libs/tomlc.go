@@ -26,6 +26,7 @@ type mysql struct {
 	Db 			string		`json:"db" map:"db" toml:"db"`
 	MaxCon		int 		`json:"max_con" map:"max_con" toml:"max_con"`
 	MaxIdle 	int 		`json:"max_idle" map:"max_idle" toml:"max_idle"`
+	Timeout 	int 		`json:"timeout" map:"timeout" toml:"timeout"`
 }
 
 type redis struct {
