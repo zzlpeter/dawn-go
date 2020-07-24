@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/zzlpeter/dawn-go/libs"
 	_ "github.com/go-sql-driver/mysql"
@@ -36,7 +37,10 @@ func makeDbConn() {
 	}
 }
 
-func GetDbConn(db string) *gorm.DB {
+func GetDbConn(db string) (*gorm.DB, error) {
 	getDbConn()
-	return dbMap[db]
+	if val, ok := dbMap[db]; ok {
+		return val, nil
+	}
+	return nil, errors.New(fmt.Sprintf("db alias: %s is missed, please ensure you make it in conf.toml", db))
 }
