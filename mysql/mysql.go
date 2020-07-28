@@ -44,3 +44,21 @@ func GetDbConn(db string) (*gorm.DB, error) {
 	}
 	return nil, errors.New(fmt.Sprintf("db alias: %s is missed, please ensure you make it in conf.toml", db))
 }
+
+/*
+type Task struct {
+	ID 		int
+	Status  string
+}
+
+func (t Task) TableName() string {
+	return "task"
+}
+
+func testQuery() {
+	db, _ := mysql.GetDbConn("default")
+	task := Task{}
+	db.Select([]string{"id", "status"}).First(&task)
+	fmt.Println(task.ID, task.Status)
+}
+*/
