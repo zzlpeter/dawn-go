@@ -32,3 +32,11 @@ func TestStruct2Json(t *testing.T) {
 		t.Errorf("Struct2Json fails")
 	}
 }
+
+func TestStruct2Map(t *testing.T) {
+	user := User{"alex"}
+	mapper := Struct2Map(user)
+	if _, ok := mapper["Name"]; !ok {
+		t.Errorf("Struct2Map fails")
+	}
+}
