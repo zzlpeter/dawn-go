@@ -73,7 +73,7 @@ func MD5(s string) string {
 
 // 生成UUID
 func GenUUID() string {
-	u1 := uuid.NewV4()
+	u1, _ := uuid.NewV4()
 	s := u1.String()
 	s = strings.Replace(s, "-", "", 4)
 	return s

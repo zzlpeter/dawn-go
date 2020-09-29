@@ -1,0 +1,485 @@
+definitions:
+  api.SwaggerResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Dawn-go API By Golang Gin
+  termsOfService: https://github.com/zzlpeter/dawn-go
+  title: Dawn-go API By Gin
+  version: "1.0"
+paths:
+  /assassin/account/permission:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Delete special permission
+      tags:
+      - Account
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: role_id
+        in: formData
+        name: role_id
+        required: true
+        type: string
+      - description: permission_id
+        in: formData
+        name: permission_id
+        required: true
+        type: string
+      - description: permission_desc
+        in: formData
+        name: permission_desc
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Add special permission
+      tags:
+      - Account
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        required: true
+        type: string
+      - description: role_id
+        in: formData
+        name: role_id
+        required: true
+        type: string
+      - description: permission_id
+        in: formData
+        name: permission_id
+        required: true
+        type: string
+      - description: permission_desc
+        in: formData
+        name: permission_desc
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Update special permission
+      tags:
+      - Account
+  /assassin/account/permissions:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: size
+        in: query
+        name: size
+        required: true
+        type: string
+      - description: role_id
+        in: query
+        name: role_id
+        required: true
+        type: string
+      - description: permission_id
+        in: query
+        name: permission_id
+        type: string
+      - description: permission_desc
+        in: query
+        name: permission_desc
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Get permissions list
+      tags:
+      - Account
+  /assassin/account/role:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Delete special role
+      tags:
+      - Account
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: role_id
+        in: formData
+        name: role_id
+        required: true
+        type: string
+      - description: role_desc
+        in: formData
+        name: role_desc
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Add special role
+      tags:
+      - Account
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        required: true
+        type: string
+      - description: role_id
+        in: formData
+        name: role_id
+        required: true
+        type: string
+      - description: role_desc
+        in: formData
+        name: role_desc
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Update special role
+      tags:
+      - Account
+  /assassin/account/roles:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: size
+        in: query
+        name: size
+        required: true
+        type: string
+      - description: role_id
+        in: query
+        name: role_id
+        type: string
+      - description: role_desc
+        in: query
+        name: role_desc
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Get roles list
+      tags:
+      - Account
+  /assassin/cas/:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: userName
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Get Auth
+  /assassin/task/task:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Get special task
+      tags:
+      - Tasks
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 任务key
+        in: formData
+        name: task_key
+        required: true
+        type: string
+      - description: 执行方法
+        in: formData
+        name: execute_func
+        required: true
+        type: string
+      - description: 任务描述
+        in: formData
+        name: desc
+        required: true
+        type: string
+      - description: 调度类型
+        in: formData
+        name: trigger
+        required: true
+        type: string
+      - description: 调度频次
+        in: formData
+        name: spec
+        required: true
+        type: string
+      - description: 执行参数
+        in: formData
+        name: args
+        type: string
+      - description: 是否有效
+        in: formData
+        name: is_valid
+        required: true
+        type: string
+      - description: 执行状态
+        in: formData
+        name: status
+        required: true
+        type: string
+      - description: 额外信息
+        in: formData
+        name: extra
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Add special task
+      tags:
+      - Tasks
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 任务ID
+        in: formData
+        name: id
+        required: true
+        type: integer
+      - description: 任务key
+        in: formData
+        name: task_key
+        required: true
+        type: string
+      - description: 执行方法
+        in: formData
+        name: execute_func
+        required: true
+        type: string
+      - description: 任务描述
+        in: formData
+        name: desc
+        required: true
+        type: string
+      - description: 调度类型
+        in: formData
+        name: trigger
+        required: true
+        type: string
+      - description: 调度频次
+        in: formData
+        name: spec
+        required: true
+        type: string
+      - description: 执行参数
+        in: formData
+        name: args
+        type: string
+      - description: 是否有效
+        in: formData
+        name: is_valid
+        required: true
+        type: string
+      - description: 额外信息(json格式)
+        in: formData
+        name: extra
+        type: string
+      - description: 执行状态
+        in: formData
+        name: status
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Update special task
+      tags:
+      - Tasks
+  /assassin/task/tasks:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: size
+        in: query
+        name: size
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.SwaggerResponse'
+      summary: Get tasks list
+      tags:
+      - Tasks
+swagger: "2.0"

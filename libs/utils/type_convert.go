@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"reflect"
+	"strconv"
 )
 
 func Map2Json(m map[string]interface{}) (string, error) {
@@ -47,4 +48,9 @@ func Struct2Map(s interface{}) map[string]interface{} {
 		m[field] = o2.Field(i).Interface()
 	}
 	return m
+}
+
+func String2Int(s string) (int, error) {
+	rst, err := strconv.Atoi(s)
+	return rst, err
 }

@@ -91,6 +91,10 @@ func GetRedisPool(alias string) *pool {
 	return redisPollMap[alias]
 }
 
+func init() {
+	getPool()
+}
+
 /*
 func test() {
 	rc := GetRedisPool("default").Get()

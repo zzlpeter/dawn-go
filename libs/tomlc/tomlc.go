@@ -45,7 +45,7 @@ func getFilePath() string {
 }
 
 func readConfig() {
-	_, err := toml.DecodeFile("conf/conf.toml", &cfg)
+	_, err := toml.DecodeFile("/Users/zhangzhiliang/go/src/github.com/zzlpeter/dawn-go/conf/conf.toml", &cfg)
 	if err != nil {
 		log.Fatalf("read conf.toml fails with error: %v", err.Error())
 	}

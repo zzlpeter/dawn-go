@@ -45,6 +45,9 @@ func GetDbConn(db string) (*gorm.DB, error) {
 	return nil, errors.New(fmt.Sprintf("db alias: %s is missed, please ensure you make it in conf.toml", db))
 }
 
+func init() {
+	getDbConn()
+}
 /*
 type Task struct {
 	ID 		int
