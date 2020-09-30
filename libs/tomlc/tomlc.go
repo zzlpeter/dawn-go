@@ -41,11 +41,12 @@ type redis struct {
 }
 
 func getFilePath() string {
-	return ""
+	return "conf/conf.toml"
 }
 
 func readConfig() {
-	_, err := toml.DecodeFile("/Users/zhangzhiliang/go/src/github.com/zzlpeter/dawn-go/conf/conf.toml", &cfg)
+	fileConf := getFilePath()
+	_, err := toml.DecodeFile(fileConf, &cfg)
 	if err != nil {
 		log.Fatalf("read conf.toml fails with error: %v", err.Error())
 	}
