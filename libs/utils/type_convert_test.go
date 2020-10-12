@@ -40,3 +40,17 @@ func TestStruct2Map(t *testing.T) {
 		t.Errorf("Struct2Map fails")
 	}
 }
+
+func TestMap2Struct(t *testing.T) {
+	mapper := map[string]interface{}{
+		"name": "alex",
+	}
+	user := &User{}
+	err := Map2Struct(mapper, user)
+	if err != nil {
+		t.Errorf("Map2Struct fails")
+	}
+	if user.Name != "alex" {
+		t.Errorf("Map2Struct fails")
+	}
+}
