@@ -3,7 +3,7 @@ package main
 import (
 	_ "github.com/zzlpeter/dawn-go/libs/mysql"
 	_ "github.com/zzlpeter/dawn-go/libs/redis"
-	routers2 "github.com/zzlpeter/dawn-go/routers"
+	_routers "github.com/zzlpeter/dawn-go/routers"
 )
 
 // @title Dawn-go API By Gin
@@ -11,6 +11,6 @@ import (
 // @description Dawn-go API By Golang Gin
 // @termsOfService https://github.com/zzlpeter/dawn-go
 func main() {
-	routers := routers2.InitRouter()
+	routers := _routers.InitRouter()
 	routers.Run(":8001")
 }

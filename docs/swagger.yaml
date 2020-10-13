@@ -275,33 +275,6 @@ paths:
       summary: Get roles list
       tags:
       - Account
-  /assassin/cas/:
-    get:
-      consumes:
-      - application/x-www-form-urlencoded
-      parameters:
-      - description: userName
-        in: query
-        name: username
-        required: true
-        type: string
-      - description: password
-        in: query
-        name: password
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/api.SwaggerResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/api.SwaggerResponse'
-      summary: Get Auth
   /assassin/task/task:
     get:
       consumes:

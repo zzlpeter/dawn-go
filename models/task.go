@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/jinzhu/gorm"
+	"github.com/robfig/cron/v3"
 	"github.com/zzlpeter/dawn-go/libs/utils"
 	"time"
 )
@@ -55,11 +56,8 @@ func (t *Task) BeforeUpdate(tx *gorm.DB) error {
 }
 
 func (t Task) isCronValid() error {
- 	if t.Spec != "1" {
-		err := errors.New("cron format is invalid")
-		return err
-	}
-	return nil
+	_, err := cron.ParseStandard(t.Spec)
+	return err
 }
 
 func (t Task) isIntervalValid() error {
