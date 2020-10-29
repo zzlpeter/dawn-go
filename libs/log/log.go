@@ -77,7 +77,7 @@ func init() {
 }
 
 // 记录日志
-// 具体使用方法参考 narnia/middlewares/logger_middleware.go:28
+// 具体使用方法参考 dawn-go/middlewares/logger_middleware.go:28
 func LogRecord(c *gin.Context, level, msg string, kvs ...interface{}) error {
 	if len(kvs) % 2 == 1 {
 		return errors.New("kvs should be coupled")
