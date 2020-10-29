@@ -1,19 +1,19 @@
 [mysql]
     [mysql.default]
-        host = "172.28.48.50"
+        host = ""
         port = 3306
         db = "task"
-        username = "root"
-        password = "000000"
+        username = ""
+        password = ""
         max_con = 1
         max_idle = 50
         timeout = 10
     [mysql.permission]
-        host = "172.28.48.50"
+        host = ""
         port = 3306
         db = "permission"
-        username = "root"
-        password = "000000"
+        username = ""
+        password = ""
         max_con = 1
         max_idle = 50
         timeout = 10
