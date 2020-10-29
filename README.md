@@ -1,3 +1,37 @@
+项目结构说明
+```
+conf                        配置文件
+    local.toml
+    test.toml
+    product.toml
+docs                        swagger所使用
+grequests                   三方HTTP请求
+libs                        库函数
+    log                         日志模块
+    mysql                       数据库模块
+    redis                       Redis模块
+    tomlc                       解析toml文件模块
+    utils                       其他库函数
+        datekits                    时间相关
+        type_convert                类型转换相关
+        utils                       其他
+middlewares                 中间件
+    auth_middleware             认证中间件
+    logger_middleware           日志记录中间件
+    panic_middleware            捕获panic中间件
+    response                    返回结果快捷函数
+    trace_id_middleware         设置trace-ID
+models                      数据库models
+pkg                         负责的业务逻辑
+routers                     
+    api                         views层
+    router                      路由层
+Dockerfile
+main.go                     入口函数
+README.md
+```
+
+启动流程
 ```
 修改conf/conf.toml配置文件
 执行SQL创建表
@@ -53,7 +87,7 @@ CREATE TABLE `task`.`task_execute`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '任务执行表' ROW_FORMAT = Compact;
 
 安装依赖包
-git mod vendor 
+go mod init & go mod vendor 
 
 执行main函数
 go run main.go
