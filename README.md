@@ -89,6 +89,10 @@ CREATE TABLE `task`.`task_execute`  (
 安装依赖包
 go mod init & go mod vendor 
 
+安装swagger
+go get -u github.com/swaggo/swag/cmd/swag
+swag init
+
 执行main函数
 go run main.go
 
