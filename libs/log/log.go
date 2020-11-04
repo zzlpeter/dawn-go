@@ -2,12 +2,14 @@ package log
 
 import (
 	"errors"
+	"fmt"
 	"github.com/zzlpeter/dawn-go/libs/tomlc"
 	"github.com/zzlpeter/dawn-go/libs/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"runtime"
 	"sync"
 )
 
@@ -82,8 +84,10 @@ func LogRecord(c *gin.Context, level, msg string, kvs ...interface{}) error {
 	if len(kvs) % 2 == 1 {
 		return errors.New("kvs should be coupled")
 	}
-	traceId := c.Writer.Header().Get("X-Request-Id")
-	zapFields := makeZapFields(traceId, kvs...)
+	err, zapFields := makeZapFields(c, kvs...)
+	if err != nil {
+		return err
+	}
 	switch level {
 	case DEBUG:
 		loggerN.Debug(msg, zapFields...)
@@ -102,16 +106,31 @@ func LogRecord(c *gin.Context, level, msg string, kvs ...interface{}) error {
 }
 
 // 组装zap需要的日志参数
-func makeZapFields(traceId string, kvs ...interface{}) []zap.Field {
-	arr := []zap.Field{zap.String("trace_id", traceId)}
+func makeZapFields(c *gin.Context, kvs ...interface{}) (error, []zap.Field) {
+	var arr []zap.Field
+	// 校验kvs是否合法
 	l := len(kvs)
 	var idx = 0
 	for {
 		if idx >= l {
 			break
 		}
-		arr = append(arr, zap.Any(kvs[idx].(string), kvs[idx+1]))
+		k, ok := kvs[idx].(string)
+		if !ok {
+			return errors.New(fmt.Sprintf("Type of k: %v is not string", kvs[idx])), arr
+		}
+		arr = append(arr, zap.Any(k, kvs[idx+1]))
 		idx+=2
 	}
-	return arr
+	// 设置trace-ID
+	if c != nil {
+		traceId := c.Writer.Header().Get("X-Request-Id")
+		ip := c.ClientIP()
+		arr = append(arr, zap.String("trace_id", traceId), zap.String("access_ip", ip))
+	}
+	// 获取调用栈信息
+	_, file, line, _ := runtime.Caller(2)
+	arr = append(arr, zap.String("file", file), zap.Int("line", line))
+
+	return nil, arr
 }
