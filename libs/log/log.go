@@ -9,6 +9,9 @@ import (
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"log"
+	"os"
+	"path"
 	"runtime"
 	"sync"
 )
@@ -29,6 +32,10 @@ func getLogger() {
 
 func makeLogger() {
 	logFile := tomlc.Config{}.BasicConf()["log"].(string)
+	if _, err := os.Stat(logFile); err != nil {
+		log.Fatalf("LogPath: %v is not existed", logFile)
+	}
+	logFile = path.Join(logFile, "root.log")
 	hook := lumberjack.Logger{
 		Filename:   logFile, 		// 日志文件路径
 		MaxSize:    128,            // 每个日志文件保存的最大尺寸 单位：M

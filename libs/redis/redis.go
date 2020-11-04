@@ -63,8 +63,24 @@ func makeRedisPool() {
 				},
 			},
 		}
+
+		// 校验连接是否正确建立
+		ch := make(chan bool)
+		go testConnectRedis(ch, client)
+		select {
+		case <- time.After(time.Second * 5):
+			log.Fatalf("connect redis: dial tcp %v:%v connect timeout", conf["host"], conf["port"])
+		case <- ch:
+		}
+
 		redisPollMap[alias] = client
 	}
+}
+
+func testConnectRedis(ch chan bool, rds *pool) {
+	r := rds.Get()
+	defer r.Close()
+	ch <- true
 }
 
 func dial(alias string, conf map[string]interface{}) func() (redis.Conn, error) {
