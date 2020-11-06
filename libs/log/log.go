@@ -48,7 +48,6 @@ func makeLogger() {
 		TimeKey:        "time",
 		LevelKey:       "level",
 		NameKey:        "logger",
-		CallerKey:      "linenum",
 		MessageKey:     "msg",
 		StacktraceKey:  "stacktrace",
 		LineEnding:     zapcore.DefaultLineEnding,
