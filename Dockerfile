@@ -7,7 +7,7 @@ ENV GOPROXY https://goproxy.cn,direct
 WORKDIR $GOPATH/src/github.com/zzlpeter/dawn-go
 COPY . $GOPATH/src/github.com/zzlpeter/dawn-go
 RUN go get -u github.com/swaggo/swag/cmd/swag
-RUN go mod init & go mod vendor & swag init
+
 RUN go build .
 
 EXPOSE 8001

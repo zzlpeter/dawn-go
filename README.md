@@ -86,9 +86,6 @@ CREATE TABLE `task`.`task_execute`  (
   INDEX `idx__execute_task__task_id_create_at`(`task_id`, `create_at`) USING BTREE COMMENT '任务ID、创建时间'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '任务执行表' ROW_FORMAT = Compact;
 
-安装依赖包
-go mod init & go mod vendor 
-
 安装swagger
 go get -u github.com/swaggo/swag/cmd/swag
 swag init
