@@ -511,7 +511,7 @@ var doc = `{
                         "in": "formData"
                     },
                     {
-                        "type": "string",
+                        "type": "boolean",
                         "description": "是否有效",
                         "name": "is_valid",
                         "in": "formData",
@@ -519,9 +519,10 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "额外信息(json格式)",
+                        "description": "额外信息(json-map格式)",
                         "name": "extra",
-                        "in": "formData"
+                        "in": "formData",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -600,7 +601,7 @@ var doc = `{
                         "in": "formData"
                     },
                     {
-                        "type": "string",
+                        "type": "boolean",
                         "description": "是否有效",
                         "name": "is_valid",
                         "in": "formData",
@@ -615,9 +616,10 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "额外信息",
+                        "description": "额外信息(json-map格式)",
                         "name": "extra",
-                        "in": "formData"
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {

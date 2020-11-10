@@ -336,15 +336,16 @@ paths:
         in: formData
         name: is_valid
         required: true
-        type: string
+        type: boolean
       - description: 执行状态
         in: formData
         name: status
         required: true
         type: string
-      - description: 额外信息
+      - description: 额外信息(json-map格式)
         in: formData
         name: extra
+        required: true
         type: string
       produces:
       - application/json
@@ -402,10 +403,11 @@ paths:
         in: formData
         name: is_valid
         required: true
-        type: string
-      - description: 额外信息(json格式)
+        type: boolean
+      - description: 额外信息(json-map格式)
         in: formData
         name: extra
+        required: true
         type: string
       - description: 执行状态
         in: formData

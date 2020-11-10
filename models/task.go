@@ -25,7 +25,7 @@ type Task struct {
 	Args 		string		`json:"args" comment:"执行参数"`
 	IsValid 	bool		`json:"is_valid" comment:"是否有效"`
 	Status 		string		`json:"status" comment:"任务执行状态ready/doing"`
-	Extra 		string		`json:"extra" comment:"额外信息(json格式)"`
+	Extra 		GORMJsonMapper		`json:"extra" comment:"额外信息(json格式)"`
 }
 
 func (t *Task) TableName() string {
@@ -34,8 +34,8 @@ func (t *Task) TableName() string {
 
 func (t *Task) BeforeCreate(tx *gorm.DB) error {
 	// 校验extra是否有值
-	if t.Extra == "" {
-		t.Extra = "{}"
+	if t.Extra == nil {
+		t.Extra = map[string]interface{}{}
 	}
 	// 校验trigger是否为cron/date/interval
 	switch t.Trigger {

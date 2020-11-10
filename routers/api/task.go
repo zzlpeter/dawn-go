@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/zzlpeter/dawn-go/libs/mysql"
 	"github.com/zzlpeter/dawn-go/libs/utils"
@@ -65,9 +66,9 @@ func GetTask(c *gin.Context) {
 // @Param trigger formData string true "调度类型"
 // @Param spec formData string true "调度频次"
 // @Param args formData string false "执行参数"
-// @Param is_valid formData string true "是否有效"
+// @Param is_valid formData boolean true "是否有效"
 // @Param status formData string true "执行状态"
-// @Param extra formData string false "额外信息"
+// @Param extra formData string true "额外信息(json-map格式)"
 // @Success 200 {object} SwaggerResponse
 // @Failure 500 {object} SwaggerResponse
 // @Router /assassin/task/task [post]
@@ -79,11 +80,16 @@ func PostTask(c *gin.Context) {
 	spec := c.PostForm("spec")
 	args := c.PostForm("args")
 	isValid := c.PostForm("is_valid")
-	var valid bool
-	if isValid == "1" {
-		valid = true
-	}
+
+	// 参数校验
+	valid := utils.String2Boolean(isValid)
 	extra := c.PostForm("extra")
+	extJson, err := utils.Json2Map(extra)
+	if err != nil {
+		middlewares.ResponseError(400, fmt.Sprintf("extra: %v is not map", extra), c)
+		return
+	}
+
 	task := models.Task{
 		TaskKey: taskKey,
 		Desc: desc,
@@ -93,7 +99,7 @@ func PostTask(c *gin.Context) {
 		Args: args,
 		IsValid: valid,
 		Status: "ready",
-		Extra: extra,
+		Extra: extJson,
 	}
 	db, _ := mysql.GetDbConn("default")
 	if err := db.Create(&task).Error; err != nil {
@@ -114,8 +120,8 @@ func PostTask(c *gin.Context) {
 // @Param trigger formData string true "调度类型"
 // @Param spec formData string true "调度频次"
 // @Param args formData string false "执行参数"
-// @Param is_valid formData string true "是否有效"
-// @Param extra formData string false "额外信息(json格式)"
+// @Param is_valid formData boolean true "是否有效"
+// @Param extra formData string true "额外信息(json-map格式)"
 // @Param status formData string true "执行状态"
 // @Success 200 {object} SwaggerResponse
 // @Failure 500 {object} SwaggerResponse
@@ -132,6 +138,14 @@ func PutTask(c *gin.Context) {
 	status := c.PostForm("status")
 	extra := c.PostForm("extra")
 
+	// 参数校验
+	valid := utils.String2Boolean(isValid)
+	extJson, err := utils.Json2Map(extra)
+	if err != nil {
+		middlewares.ResponseError(400, fmt.Sprintf("extra: %v is not map", extra), c)
+		return
+	}
+
 	db, _ := mysql.GetDbConn("default")
 	mapper := map[string]interface{}{
 		"task_key": taskKey,
@@ -140,9 +154,9 @@ func PutTask(c *gin.Context) {
 		"trigger": trigger,
 		"spec": spec,
 		"args": args,
-		"is_valid": isValid,
+		"is_valid": valid,
 		"status": status,
-		"extra": extra,
+		"extra": extJson,
 	}
 
 	if err := db.Model(&models.Task{}).Where("id = ?", id).Updates(mapper).Error; err != nil {

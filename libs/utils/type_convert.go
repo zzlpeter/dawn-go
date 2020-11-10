@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 func Map2Json(m map[string]interface{}) (string, error) {
@@ -75,4 +76,14 @@ func Map2Struct(mapper map[string]interface{}, st interface{}) error {
 func String2Int(s string) (int, error) {
 	rst, err := strconv.Atoi(s)
 	return rst, err
+}
+
+func String2Boolean(s string) bool {
+	var b bool
+	s = strings.ToLower(s)
+	if s == "1" || s == "true" {
+		b = true
+	}
+
+	return b
 }

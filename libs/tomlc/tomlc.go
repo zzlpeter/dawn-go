@@ -41,7 +41,7 @@ type redis struct {
 }
 
 func getFilePath() string {
-	return "conf/conf.toml"
+	return "/Users/zhangzhiliang/go/src/github.com/zzlpeter/dawn-go/conf/conf.toml"
 }
 
 func readConfig() {
