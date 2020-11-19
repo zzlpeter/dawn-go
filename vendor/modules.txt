@@ -11,6 +11,9 @@ github.com/PuerkitoBio/urlesc
 ## explicit
 github.com/alecthomas/template
 github.com/alecthomas/template/parse
+# github.com/gin-contrib/pprof v1.3.0
+## explicit
+github.com/gin-contrib/pprof
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.6.3

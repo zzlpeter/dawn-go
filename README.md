@@ -95,4 +95,7 @@ go run main.go
 
 访问swagger
 http://localhost:8001/swagger/index.html
+
+pprof
+http://localhost:8001/debug/pprof/
 ```

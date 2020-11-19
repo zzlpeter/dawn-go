@@ -6,12 +6,14 @@ import (
 	"github.com/zzlpeter/dawn-go/routers/api"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/gin-contrib/pprof"
 
 	_ "github.com/zzlpeter/dawn-go/docs"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
+	pprof.Register(r)
 	// 加载捕获panic中间件
 	r.Use(middlewares.PanicCatchMiddleware())
 	// 加载swagger模块
