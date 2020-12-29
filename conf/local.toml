@@ -28,5 +28,17 @@
         max_active = 10
         idle_timeout = 60
 
+[log]
+    [log.default]
+        max_size = 100   # 文件大小为100M
+        max_backups = 7  # 备份数量
+        max_age = 30     # 最多保留多少天
+        file = "/data0/logs/dawn-go/default.log"
+    [log.access]
+        max_size = 100   # 文件大小为100M
+        max_backups = 7  # 备份数量
+        max_age = 30     # 最多保留多少天
+        file = "/data0/logs/dawn-go/access.log"
+
 [basic]
     log = "test-path"

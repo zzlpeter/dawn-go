@@ -25,7 +25,7 @@ func ApiAccessLoggerMiddleware() gin.HandlerFunc {
 		method := c.Request.Method
 		uri := c.Request.URL.Path
 		msg := fmt.Sprintf("用户%v访问%v", username, uri)
-		log.LogRecord(c, log.INFO, msg, "method", method, "query", query, "form", form, "body", body)
+		log.LogRecord(c, "access", log.INFO, msg, "method", method, "query", query, "form", form, "body", body)
 
 		c.Next()
 	}

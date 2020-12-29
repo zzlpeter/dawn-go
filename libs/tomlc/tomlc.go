@@ -11,6 +11,7 @@ import (
 type tomlConfig struct {
 	Mysql	map[string]mysql      `toml:"mysql"`
 	Redis 	map[string]redis      `toml:"redis"`
+	Log 	map[string]lg 		  `toml:"log"`
 	Basic   map[string]interface{} `toml:"basic"`
 }
 
@@ -40,8 +41,23 @@ type redis struct {
 	IdleTimeout	int 		`json:"idle_timeout" map:"idle_timeout" toml:"idle_timeout"`
 }
 
+type lg struct {
+	MaxSize 	int 		`json:"max_size" map:"max_size" toml:"max_size"`
+	MaxBackups	int 		`json:"max_backups" map:"max_backups" toml:"max_backups"`
+	MaxAge 		int 		`json:"max_age" map:"max_age" toml:"max_age"`
+	File 		string		`json:"file" map:"file" toml:"file"`
+}
+
 func getFilePath() string {
-	return "/Users/zhangzhiliang/go/src/github.com/zzlpeter/dawn-go/conf/conf.toml"
+	cf := "local.toml"
+	env := utils.Environ{}.Get("APP_ENV")
+	if env == "test" {
+		cf = "test.toml"
+	} else if env == "product" {
+		cf = "product.toml"
+	}
+
+	return "conf/" + cf
 }
 
 func readConfig() {
@@ -95,6 +111,23 @@ func (c Config) RedisConfS() map[string]map[string]interface{} {
 		redisMap[k] = m
 	}
 	return redisMap
+}
+
+func (c Config) LogConf(alias string) map[string]interface{} {
+	conf := getConfig()
+	cS := conf.Log[alias]
+	m := utils.Struct2Map(cS)
+	return m
+}
+
+func (c Config) LogConfS() map[string]map[string]interface{} {
+	conf := getConfig()
+	logMap := make(map[string]map[string]interface{})
+	for k, v := range conf.Log {
+		m := utils.Struct2Map(v)
+		logMap[k] = m
+	}
+	return logMap
 }
 
 func (c Config) BasicConf() map[string]interface{} {

@@ -3,6 +3,7 @@ package main
 import (
 	_ "github.com/zzlpeter/dawn-go/libs/mysql"
 	_ "github.com/zzlpeter/dawn-go/libs/redis"
+	_ "github.com/zzlpeter/dawn-go/libs/log"
 	_routers "github.com/zzlpeter/dawn-go/routers"
 )
 
